@@ -1,11 +1,11 @@
 # diel
 
 A digital sundial that shifts with the hour.  
-Light changes. Words surface, briefly, when touched.
+Light changes. Words surface briefly when touched.
 
 Built with HTML, CSS, and JavaScript.  
 Installable as a Progressive Web App.  
-No interface. No controls. Just time and presence.
+No interface, no controls, just time and presence.
 
 ---
 
