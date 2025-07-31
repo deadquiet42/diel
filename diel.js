@@ -72,13 +72,11 @@ function updateVisuals() {
   const now = new Date();
   const hour = now.getHours();
   const minute = now.getMinutes();
-  const angle = (hour + minute / 60) * 15; // 15° per hour
+  const angle = (hour + minute / 60) * 15;
 
-  // Set up ring transform *in addition* to the center translation
   const ring = document.getElementById('ring');
-  ring.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+  document.documentElement.style.setProperty('--rotation-angle', `${angle}deg`);
 
-  // Update background and ring colours
   const { center, edge, ringStart, ringEnd } = palette[hour];
   document.documentElement.style.setProperty('--center-color', center);
   document.documentElement.style.setProperty('--edge-color', edge);
@@ -90,7 +88,6 @@ function showPhrase() {
   const now = new Date();
   const hour = now.getHours();
 
-  // If hour has changed, pick a new phrase
   if (hour !== cachedHour) {
     const options = phrases[hour];
     cachedPhrase = options[Math.floor(Math.random() * options.length)];
@@ -99,19 +96,15 @@ function showPhrase() {
 
   const phraseEl = document.getElementById('phrase');
   phraseEl.textContent = cachedPhrase;
-  phraseEl.style.opacity = 1;
+  phraseEl.classList.add('show');
 
   setTimeout(() => {
-    phraseEl.style.opacity = 0;
+    phraseEl.classList.remove('show');
   }, 8000);
 }
 
-// Initialise immediately
 updateVisuals();
-
-// Refresh visuals every minute
 setInterval(updateVisuals, 60000);
 
-// Show phrase on interaction only
 document.body.addEventListener('click', showPhrase);
 document.body.addEventListener('touchstart', showPhrase);
